@@ -9,15 +9,22 @@ public class GreetingClient {
 
   public static void main(String[] args) throws Exception {
     String name = GreetingClient.class.getSimpleName();
-    request("/hello/", name);
-    request("/goodbye/", name);
+    GreetingClient client = new GreetingClient();
+    System.out.println(client.request("/hello/", name));
+    System.out.println(client.request("/goodbye/", name));
   }
 
-  private static void request(String path, String name) throws Exception {
+  public String request(String path, String name) {
     ClientRequest request = new ClientRequest(BASE_URL + path + name);
-    ClientResponse<String> response = request.get(String.class);
-    if (response.getStatus() == 200) {
-      System.out.println(response.getEntity());
+    try {
+      ClientResponse<String> response = request.get(String.class);
+      if (response.getStatus() == 200) {
+        return response.getEntity() != null ? response.getEntity() : null;
+      } else {
+        return "ERROR: status = " + response.getStatus();
+      }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
   }
 
