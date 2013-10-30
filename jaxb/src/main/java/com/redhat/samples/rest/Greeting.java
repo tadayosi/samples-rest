@@ -6,7 +6,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;
-import org.jboss.resteasy.annotations.providers.jaxb.json.BadgerFish;
 
 @Path("/")
 public class Greeting {
@@ -15,11 +14,10 @@ public class Greeting {
   @GET
   @Path("/hello/{name}")
   @Produces({ "application/json" })
-  @BadgerFish
   public Response hello(@PathParam("name") String name) {
     String message = String.format("Hello, %s!", name);
     LOGGER.info(message);
-    return new Response(message);
+    return new Response(new Message(message));
   }
 
   @GET
@@ -28,7 +26,7 @@ public class Greeting {
   public Response goodbye(@PathParam("name") String name) {
     String message = String.format("Goodbye, %s!", name);
     LOGGER.info(message);
-    return new Response(message);
+    return new Response(new Message(message));
   }
 
 }

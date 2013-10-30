@@ -6,24 +6,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-@XmlRootElement(name = "return")
-public class Response {
+@XmlRootElement
+public class Message {
 
-  private Message message;
+  private String content;
 
-  public Response() {}
+  public Message() {}
 
-  public Response(Message message) {
-    this.message = message;
+  public Message(String content) {
+    this.content = content;
   }
 
   @XmlElement
-  public Message getMessage() {
-    return message;
+  public String getContent() {
+    return content;
   }
 
-  public void setMessage(Message message) {
-    this.message = message;
+  public void setContent(String content) {
+    this.content = content;
   }
 
   @Override
