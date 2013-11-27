@@ -9,26 +9,26 @@ import org.apache.commons.lang.builder.ToStringStyle;
 @XmlRootElement
 public class Message {
 
-  private String content;
+    private String content;
 
-  public Message() {}
+    public Message() {}
 
-  public Message(String content) {
-    this.content = content;
-  }
+    public Message(String content) {
+        this.content = content;
+    }
 
-  @XmlElement
-  public String getContent() {
-    return content;
-  }
+    @XmlElement
+    public String getContent() {
+        return content;
+    }
 
-  public void setContent(String content) {
-    this.content = content;
-  }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-  }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 
 }

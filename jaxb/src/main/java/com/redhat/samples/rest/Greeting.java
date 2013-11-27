@@ -9,24 +9,24 @@ import org.apache.log4j.Logger;
 
 @Path("/")
 public class Greeting {
-  private static final Logger LOGGER = Logger.getLogger(Greeting.class);
+    private static final Logger LOGGER = Logger.getLogger(Greeting.class);
 
-  @GET
-  @Path("/hello/{name}")
-  @Produces({ "application/json" })
-  public Response hello(@PathParam("name") String name) {
-    String message = String.format("Hello, %s!", name);
-    LOGGER.info(message);
-    return new Response(new Message(message));
-  }
+    @GET
+    @Path("/hello/{name}")
+    @Produces({ "application/json" })
+    public Response hello(@PathParam("name") String name) {
+        String message = String.format("Hello, %s!", name);
+        LOGGER.info(message);
+        return new Response(new Message(message));
+    }
 
-  @GET
-  @Path("/goodbye/{name}")
-  @Produces({ "application/xml" })
-  public Response goodbye(@PathParam("name") String name) {
-    String message = String.format("Goodbye, %s!", name);
-    LOGGER.info(message);
-    return new Response(new Message(message));
-  }
+    @GET
+    @Path("/goodbye/{name}")
+    @Produces({ "application/xml" })
+    public Response goodbye(@PathParam("name") String name) {
+        String message = String.format("Goodbye, %s!", name);
+        LOGGER.info(message);
+        return new Response(new Message(message));
+    }
 
 }
