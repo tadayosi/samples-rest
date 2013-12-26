@@ -10,6 +10,12 @@
     <name>RESTful Web Services Samples</name>
     <url>https://github.com/tadayosi/samples-rest</url>
 
+    <modules>
+        <module>basic</module>
+        <module>jaxb</module>
+        <module>security</module>
+    </modules>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.resteasy>2.3.6.Final</version.resteasy>
