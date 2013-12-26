@@ -12,13 +12,14 @@
 
     <modules>
         <module>basic</module>
+        <module>cors</module>
         <module>jaxb</module>
         <module>security</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.resteasy>2.3.6.Final</version.resteasy>
+        <version.resteasy>2.3.7.Final</version.resteasy>
     </properties>
 
     <build>
@@ -26,8 +27,9 @@
         <plugins>
             <!-- build -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -36,18 +38,31 @@
             </plugin>
             <!-- package -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.4</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
             <!-- deploy -->
-            <!-- for JBoss AS 7.x / EAP 6.x -->
             <plugin>
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>7.3.Final</version>
+                <version>7.5.Final</version>
             </plugin>
         </plugins>
         <pluginManagement>
@@ -62,8 +77,24 @@
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>1.2.1</version>
                     <configuration>
-                        <classpathScope>compile</classpathScope>
+                        <classpathScope>test</classpathScope>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>9.1.0.v20131115</version>
+                    <configuration>
+                        <httpConnector>
+                            <port>18080</port>
+                        </httpConnector>
+                        <reload>manual</reload>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.switchyard</groupId>
+                    <artifactId>switchyard-plugin</artifactId>
+                    <version>${version.switchyard}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -71,16 +102,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging-api</artifactId>
-            <version>1.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-            <scope>provided</scope>
+            <groupId>org.functionaljava</groupId>
+            <artifactId>functionaljava</artifactId>
+            <version>3.1</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -93,13 +117,15 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
-        <!-- resteasy -->
+
+        <!-- ***** resteasy ***** -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
             <version>${version.resteasy}</version>
             <scope>provided</scope>
         </dependency>
+
         <!-- ***** specs ***** -->
         <dependency>
             <groupId>org.jboss.spec.javax.ws.rs</groupId>
@@ -125,6 +151,21 @@
             <version>1.0.2.Final</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- ***** logging ***** -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging-api</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- ***** test ***** -->
         <dependency>
             <groupId>junit</groupId>
