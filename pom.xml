@@ -91,11 +91,6 @@
                         <reload>manual</reload>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>org.switchyard</groupId>
-                    <artifactId>switchyard-plugin</artifactId>
-                    <version>${version.switchyard}</version>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
